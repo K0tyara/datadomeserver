@@ -1,0 +1,1 @@
+export const randomOffset = (max) => (Math.random() - 0.5) * 2 * max;

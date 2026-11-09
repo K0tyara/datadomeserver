@@ -45,15 +45,15 @@ export const buildPayloadContext = (fingerprint, targetUrl, hash) => {
     const ARG_FOR_SECOND_GENERATOR = 1809053797;
     const ARG_FOR_PRIMARY_GENERATOR = _o();
 
-    console.log("ARG_FOR_SECOND_GENERATOR: " + ARG_FOR_SECOND_GENERATOR)
-    console.log("ARG_FOR_PRIMARY_GENERATOR: " + ARG_FOR_PRIMARY_GENERATOR)
+    // console.log("ARG_FOR_SECOND_GENERATOR: " + ARG_FOR_SECOND_GENERATOR)
+    // console.log("ARG_FOR_PRIMARY_GENERATOR: " + ARG_FOR_PRIMARY_GENERATOR)
 
     // const timestamp = 1067481030;
     // const ARG_FOR_SECOND_GENERATOR = 1768529110;
     // const ARG_FOR_PRIMARY_GENERATOR = _o();
 
     const timestamp = c(c(Date.now()  >> 3 ^ 11027890091) * e);
-    console.log("timestamp: " + timestamp)
+    // console.log("timestamp: " + timestamp)
     const primaryGenerator = generator(ARG_FOR_PRIMARY_GENERATOR, timestamp);
 
     const s = [];
@@ -102,6 +102,6 @@ export const buildPayloadContext = (fingerprint, targetUrl, hash) => {
         + "&responsePage=" + escape(encodeURIComponent('origin'))
         + "&ddv=" + '5.11.2'
 
-    console.log(payload);
+    // console.log(payload);
     return payload;
 }

@@ -1,5 +1,5 @@
 import { buildIpContextAsync } from "../builders/ipContext.js";
-import { buildMetricsContext } from "../builders/metricsContext.js";
+import { buildMetricsContext } from "../builders/metricsContext2.js";
 import { buildPayloadContext } from "../builders/payloadContext.js";
 import { sendPayloadToDataDomeAsync } from "./dataDomeService.js";
 

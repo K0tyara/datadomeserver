@@ -42,14 +42,18 @@ export const buildPayloadContext = (fingerprint, targetUrl, hash) => {
         return e;
     }
 
-    const ARG_FOR_SECOND_GENERATOR = 1768529110;
+    const ARG_FOR_SECOND_GENERATOR = 1809053797;
     const ARG_FOR_PRIMARY_GENERATOR = _o();
+
+    console.log("ARG_FOR_SECOND_GENERATOR: " + ARG_FOR_SECOND_GENERATOR)
+    console.log("ARG_FOR_PRIMARY_GENERATOR: " + ARG_FOR_PRIMARY_GENERATOR)
 
     // const timestamp = 1067481030;
     // const ARG_FOR_SECOND_GENERATOR = 1768529110;
     // const ARG_FOR_PRIMARY_GENERATOR = _o();
 
-    const timestamp = c(c(Date.now() >> 3 ^ 11027890091) * e);
+    const timestamp = c(c(Date.now()  >> 3 ^ 11027890091) * e);
+    console.log("timestamp: " + timestamp)
     const primaryGenerator = generator(ARG_FOR_PRIMARY_GENERATOR, timestamp);
 
     const s = [];
@@ -87,14 +91,17 @@ export const buildPayloadContext = (fingerprint, targetUrl, hash) => {
     let n = temp.length % 3;
     if (n) h.length -= (3 - n);
     const finalPayload = h.join("");
-
+    
     const payload = "jspl=" + encodeURIComponent(finalPayload)
-        + "&eventCounters=" + encodeURIComponent(JSON.stringify([])) + "&jsType=ch" + "&cid=" + encodeURIComponent(".keep")
+        + "&eventCounters=[]"
+        + "&jsType=ch"
+        + "&cid=apK26myrq8ChrJ8kVTAxne7BN47g8XICloRo5oeTktMCYUpEzgEOSGnezgUK5ExKO6~b3QEadhpV1rbnUjxCxONrUh6AmOfF3~OUouO46PipN0yUK9~WmdjEdMKl8yVo"
         + "&ddk=" + escape(encodeURIComponent(ddjsKey))
         + "&Referer=" + escape(encodeURIComponent(targetUrl))
         + "&request=" + escape(encodeURIComponent((new URL(targetUrl).pathname + new URL(targetUrl).search + new URL(targetUrl).hash).slice(0, 1024)))
         + "&responsePage=" + escape(encodeURIComponent('origin'))
-        + "&ddv=" + '5.4.0'
+        + "&ddv=" + '5.11.2'
 
+    console.log(payload);
     return payload;
 }

@@ -13,7 +13,7 @@ app.post("/bypass", async (req, res) => {
         console.log("Received bypass request with body:");
         const { ua, targetUrl, hash, proxy } = req.body;
 
-        validateRequiredParams(req.body, ["ua", "targetUrl", "hash", "proxy"]);
+        validateRequiredParams(req.body, ["ua", "targetUrl", "hash"]);
         // validateProxyFormat(proxy);
         const response = await bypassAsync({ ua, targetUrl, hash, proxy });
 

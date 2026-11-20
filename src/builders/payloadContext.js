@@ -1,5 +1,5 @@
 
-export const buildPayloadContext = (fingerprint, targetUrl, hash) => {
+export const buildPayloadContext = (fingerprint, targetUrl, hash, cid = '.keep') => {
 
     const e = 9959949970;
     let ddjsKey = hash;
@@ -8,7 +8,7 @@ export const buildPayloadContext = (fingerprint, targetUrl, hash) => {
     const c = function (n) {
         return (n = (n ^= n << 13) ^ n >> 17) ^ n << 5;
     };
-
+    //для першого генератора 
     const _o = function () {
         let O_t = 0;
         for (var d = 0; d < ddjsKey.length; d++) {
@@ -17,6 +17,16 @@ export const buildPayloadContext = (fingerprint, targetUrl, hash) => {
 
         const o = e ^ O_t ^ Un_t;
         return o;
+    }
+
+    // для другого генератора разом з cid
+    const _w = function (val) {
+        let O_t = 0;
+        for (var d = 0; d < val.length; d++) {
+            O_t = (O_t << 5) - O_t + val.charCodeAt(d) | 0
+        }
+
+        return O_t;
     }
     const generator = function (n, e) {
         var o = n,
@@ -42,23 +52,31 @@ export const buildPayloadContext = (fingerprint, targetUrl, hash) => {
         return e;
     }
 
-    const ARG_FOR_SECOND_GENERATOR = 1809053797;
-    const ARG_FOR_PRIMARY_GENERATOR = _o();
+
 
     // console.log("ARG_FOR_SECOND_GENERATOR: " + ARG_FOR_SECOND_GENERATOR)
     // console.log("ARG_FOR_PRIMARY_GENERATOR: " + ARG_FOR_PRIMARY_GENERATOR)
 
-    // const timestamp = 1067481030;
-    // const ARG_FOR_SECOND_GENERATOR = 1768529110;
-    // const ARG_FOR_PRIMARY_GENERATOR = _o();
+    // для першого генератора ключ це токен каптчи через кодування, функція _o
+    // const ARG_FOR_PRIMARY_GENERATOR = -1228499404
+    const ARG_FOR_PRIMARY_GENERATOR = _o();
 
-    const timestamp = c(c(Date.now()  >> 3 ^ 11027890091) * e);
-    // console.log("timestamp: " + timestamp)
+    // для другого генератора ключ це cid якщо куків немає то це .keep якщо є то вони 
+    //1809053797 ^ w(n) - n = cid, 1809053797 ^ cid = 1768529110
+    // const ARG_FOR_SECOND_GENERATOR = 1768529110;
+
+    const ARG_FOR_SECOND_GENERATOR = 1809053797 ^ _w(cid);
+
+
+    // const timestamp = -945233954;
+    const timestamp = c(c(Date.now() >> 3 ^ 11027890091) * e);
+    console.log("timestamp: " + timestamp)
     const primaryGenerator = generator(ARG_FOR_PRIMARY_GENERATOR, timestamp);
 
     const s = [];
 
-    for (const [key, value] of Object.entries(fingerprint)) {
+
+    for (const [key, value] of fingerprint) {
         s.push(primaryGenerator() ^ (s.length ? 44 : 123));
         Array.prototype.push.apply(s, dWrite(key));
         s.push(58 ^ primaryGenerator());
@@ -91,17 +109,18 @@ export const buildPayloadContext = (fingerprint, targetUrl, hash) => {
     let n = temp.length % 3;
     if (n) h.length -= (3 - n);
     const finalPayload = h.join("");
-    
+    const eventCounters = cid === '.keep' ? '[]' : '{"mousemove":29,"pointermove":29,"click":0,"scroll":0,"touchstart":0,"touchend":0,"touchcancel":0,"touchmove":0,"keydown":0,"keyup":0,"paste":0,"input":0,"change":0}';
+    const jsType =  cid === '.keep' ? 'ch' : 'le'
     const payload = "jspl=" + encodeURIComponent(finalPayload)
-        + "&eventCounters=[]"
-        + "&jsType=ch"
-        + "&cid=apK26myrq8ChrJ8kVTAxne7BN47g8XICloRo5oeTktMCYUpEzgEOSGnezgUK5ExKO6~b3QEadhpV1rbnUjxCxONrUh6AmOfF3~OUouO46PipN0yUK9~WmdjEdMKl8yVo"
+        + '&eventCounters=' + eventCounters
+        + "&jsType=" + jsType
+        + `&cid=${cid}`
         + "&ddk=" + escape(encodeURIComponent(ddjsKey))
         + "&Referer=" + escape(encodeURIComponent(targetUrl))
         + "&request=" + escape(encodeURIComponent((new URL(targetUrl).pathname + new URL(targetUrl).search + new URL(targetUrl).hash).slice(0, 1024)))
         + "&responsePage=" + escape(encodeURIComponent('origin'))
-        + "&ddv=" + '5.11.2'
+        + "&ddv=" + '5.11.5'
 
-    // console.log(payload);
+    console.log(payload);
     return payload;
 }

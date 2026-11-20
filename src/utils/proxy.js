@@ -1,16 +1,15 @@
 export const parseProxy = (proxy) => {
-    const withScheme = /^[a-z]+:\/\//i.test(proxy) ? proxy : `http://${proxy}`;
-    const u = new URL(withScheme);
+    const url = new URL(proxy);
 
     return {
-        protocol: u.protocol.replace(":", ""),
-        host: u.hostname,
-        port: Number(u.port) || 80,
-        auth: u.username
+        protocol: url.protocol.replace(':', ''),
+        host: url.hostname,
+        port: Number(url.port),
+        auth: url.username
             ? {
-                  username: decodeURIComponent(u.username),
-                  password: decodeURIComponent(u.password),
-              }
-            : undefined,
+                username: url.username,
+                password: url.password
+            }
+            : undefined
     };
 };

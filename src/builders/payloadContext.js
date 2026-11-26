@@ -119,7 +119,7 @@ export const buildPayloadContext = (fingerprint, targetUrl, hash, cid = '.keep')
         + "&Referer=" + escape(encodeURIComponent(targetUrl))
         + "&request=" + escape(encodeURIComponent((new URL(targetUrl).pathname + new URL(targetUrl).search + new URL(targetUrl).hash).slice(0, 1024)))
         + "&responsePage=" + escape(encodeURIComponent('origin'))
-        + "&ddv=" + '5.11.5'
+        + "&ddv=" + '5.12.0'
 
     console.log(payload);
     return payload;

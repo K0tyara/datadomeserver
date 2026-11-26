@@ -13,7 +13,7 @@ export const sendPayloadToDataDomeAsync = async (payload, userAgent, proxy) => {
                 'User-Agent': userAgent,
                 'Referer': "https://www.viagogo.com/",
                 'origin': 'https://www.viagogo.com',
-                'sec-ch-ua': '"Not-A.Brand";v="99", "Google Chrome";v="157", "Chromium";v="157"',
+                'sec-ch-ua': '"Chromium";v="158", "Not.A/Brand";v="24", "Google Chrome";v="158"',
                 'Content-type': 'application/x-www-form-urlencoded',
                 'sec-ch-ua-mobile': '?0',
                 'Accept': '*/*',

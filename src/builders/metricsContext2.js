@@ -71,7 +71,7 @@ export const buildMetricsContext = (ipInfo, userAgent) => {
     const dvm    = 16;
     const hc     = 16;
     const pf     = "Win32";
-    const nhiVal = '"x86,64,false,,Windows,14.0.0,157.0.8103.79,false"';
+    const nhiVal = '"x86,64,false,,Windows,14.0.0,158.0.8127.37,false"';
 
     const uaNormalized = String(userAgent).replace(
     /Chrome\/(\d+)\.\d+\.\d+\.\d+/,
@@ -118,10 +118,10 @@ export const buildMetricsContext = (ipInfo, userAgent) => {
     put('"spvlg"', "18");
     put('"spvd"', "2147483648");
     put('"dp0"', "false");
-    put('"ccsT"', '"Error\\nat E1 (https://crowdcontrol.viagogo.com/d6631957--tags.js:4499:43)\\nat y1._ (https://crowdcontrol.viagogo.com/d6631957--tags.js:2602:45)\\nat https"');
-    put('"ccsB"', '"crowdcontrol.viagogo.com/d6631957--tags.js:4758:53\\nat r (https://cdn.stubhubstatic.com/site-assets/www/Scripts/d/e/v/sentry.BouDWVhI.chunk.js:2:55935)"');
-    put('"ccsH"', "560047232");
-    put('"ccsV"', '",6bb61b98385c0b527f00cd01d107f7e73f087bc1852e5abfd4a51967c4ef3a87"');
+    put('"ccsT"', '"Error\nat rt (https://crowdcontrol.viagogo.com/d6631957--tags.js:2:132729)\nat H1.P (https://crowdcontrol.viagogo.com/d6631957--tags.js:2:94841)\nat http"');
+    put('"ccsB"', '"631957--tags.js:2:94841)\nat https://crowdcontrol.viagogo.com/d6631957--tags.js:2:131544\nat https://crowdcontrol.viagogo.com/d6631957--tags.js:2:138965"');
+    put('"ccsH"', "956708921");
+    // put('"ccsV"', '",6bb61b98385c0b527f00cd01d107f7e73f087bc1852e5abfd4a51967c4ef3a87"');
 
     // --- 20..33 ---
     put('"wdifrm"', "false");
@@ -300,10 +300,10 @@ export const buildMetricsContext = (ipInfo, userAgent) => {
     put('"dpb"', "true");
 
     // --- 199..204 ---
-    put('"fph"',  "2560250357");
-    put('"sgb"',  '"3192781678"');
+    put('"fph"',  "748683156");
+    put('"sgb"',  '"194793373"');
     put('"sgd"',  '"2022760486"');
-    put('"sgc"',  '"2797938419"');
+    put('"sgc"',  '"3327307885"');
     put('"jset"', jsetVal);
     put('"bpc"',  "1");
 
